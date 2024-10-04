@@ -5,7 +5,7 @@ export async function inserirUsuario(usuario) {
     const comando = `
     
         insert into tb_usuario (nm_usuario)
-        values ('Felipe Cirqueira');
+        values (?);
 
     `;
 
