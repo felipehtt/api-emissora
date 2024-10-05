@@ -1,4 +1,5 @@
 import * as db from '../repository/programaFavoritoRepository.js'
+import consultarProgramaFavoritoIdService from '../service/programaFavoritoService.js';
 
 import { Router } from "express";
 const endpoints = Router();
@@ -111,6 +112,20 @@ endpoints.delete('/programaFavorito/:id', async (req, resp) => {
         
     }
     
+})
+
+endpoints.get('/join/programaFavorito/:id', async (req, resp) => {
+    try {
+        let id = req.params.id
+        let registros = await consultarProgramaFavoritoIdService(id)
+
+        resp.send(registros)
+    } 
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
 })
 
 
