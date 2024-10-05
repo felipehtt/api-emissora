@@ -84,3 +84,25 @@ export async function deletarCanal(id) {
 }
 
 
+//por id
+export async function consultarCanalPorId(id){
+
+    const comando = `  
+    
+        select
+        id_canal  idCanal,
+        nm_canal  nome,
+        nr_canal  numero,
+        bt_aberto aberto
+        from tb_canal
+        where id_canal = ?
+    
+    `;
+
+    let resposta = await con.query(comando, [id]);
+
+    let registros = resposta[0];
+
+    return registros;
+    
+}
