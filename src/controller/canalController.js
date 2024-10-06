@@ -1,4 +1,5 @@
-import * as db from '../repository/canalRepository.js'
+import * as db from '../repository/canalRepository.js';
+import consultarCanalPorIdService from '../service/consultarCanalPorIdService.js';
 
 import { Router } from "express";
 const endpoints = Router();
@@ -110,6 +111,31 @@ endpoints.delete('/canal/:id', async (req, resp) => {
 
         })
         
+    }
+    
+})
+
+
+//Por Id.
+endpoints.get('/canal/:id', async (req, resp) => {
+
+    try {
+    
+        let id = req.params.id;
+
+        let registros = await consultarCanalPorIdService(id);
+
+        resp.send(registros);
+        
+    } 
+    catch(err){
+        
+        resp.status(400).send({
+
+            erro: err.message
+
+        })
+
     }
     
 })

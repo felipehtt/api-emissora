@@ -1,4 +1,5 @@
 import * as db from '../repository/programaRepository.js'
+import consultarProgramaPorIdService from '../service/consultarProgramaPorIdService.js';
 
 import { Router } from "express";
 const endpoints = Router();
@@ -113,5 +114,31 @@ endpoints.delete('/programa/:id', async (req, resp) => {
     }
     
 })
+
+
+//por Id
+endpoints.get('/programa/:id', async (req, resp) => {
+
+    try {
+
+        let id = req.params.id;
+
+        let registros = await consultarProgramaPorIdService(id);
+
+        resp.send(registros);
+
+    } 
+    catch (err) {
+
+        resp.status(400).send({
+
+            erro: err.message
+
+        })
+        
+    }
+
+})
+
 
 export default endpoints;

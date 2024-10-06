@@ -63,7 +63,7 @@ endpoints.put('/programaFavorito/:id', async (req, resp) => {
 
         let linhasAfetadas = await db.alterarProgramaFavorito(programaFavorito, id);
 
-        if(linhasAfetadas == 0){
+        if (linhasAfetadas == 0) {
 
             throw new Error('Nenhum favorito alterado.');
 
@@ -93,7 +93,7 @@ endpoints.delete('/programaFavorito/:id', async (req, resp) => {
 
         let linhasAfetadas = await db.deletarProgramaFavorito(id);
 
-        if(linhasAfetadas == 0){
+        if (linhasAfetadas == 0) {
 
             throw new Error('Nenhum favorito removido.');
 
@@ -114,6 +114,7 @@ endpoints.delete('/programaFavorito/:id', async (req, resp) => {
 
 })
 
+
 endpoints.get('/join/programaFavorito/:id', async (req, resp) => {
     try {
         let id = req.params.id
@@ -132,22 +133,22 @@ endpoints.get('/join/programaFavorito/:id', async (req, resp) => {
 endpoints.get('/programaFavorito', async (req, resp) => {
 
     try {
-    
+
         let registros = await db.consultarProgramaFavoritoJoin();
 
         resp.send(registros);
 
-    } 
-    catch(err){
+    }
+    catch (err) {
 
         resp.status(400).send({
 
             erro: err.message
 
         })
-        
+
     }
-    
+
 })
 
 

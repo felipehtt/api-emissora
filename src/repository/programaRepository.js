@@ -9,7 +9,7 @@ export async function inserirPrograma(programa) {
 
     `;
 
-    let resposta = await con.query(comando, [programa.canal, programa.nome,
+    let resposta = await con.query(comando, [programa.canal, programa.nomePrograma,
     programa.genero, programa.horario]);
 
     let info = resposta[0];
@@ -86,5 +86,30 @@ export async function deletarPrograma(id) {
     let linhasAfetadas = info.affectedRows;
 
     return linhasAfetadas;
+
+}
+
+
+//por id
+export async function consultarProgramaPorId(id){
+
+    const comando = ` 
+    
+        select tb_canal_programa.id_canal_programa     idCanalPrograma,
+                tb_canal.nm_canal   				   canal,
+                tb_canal_programa.nm_programa		   nomePrograma,
+                tb_canal_programa.ds_genero  		   genero,
+                tb_canal_programa.hr_programa		   horario
+        from tb_canal_programa
+        join tb_canal on tb_canal_programa.id_canal = tb_canal.id_canal
+        where id_canal_programa = ?
+    
+    `;
+
+    let resposta = await con.query(comando, [id]);
+
+    let registros = resposta[0];
+
+    return registros;
 
 }

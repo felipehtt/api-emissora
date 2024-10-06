@@ -1,4 +1,5 @@
-import * as db from '../repository/usuarioRepository.js'
+import * as db from '../repository/usuarioRepository.js';
+import consultarUsuarioPorIdPorIdService from '../service/consultarUsuarioPorId.js';
 
 import { Router } from "express";
 const endpoints = Router();
@@ -112,6 +113,31 @@ endpoints.delete('/usuario/:id', async (req, resp) => {
         
     }
     
+})
+
+
+//por Id
+endpoints.get('/usuario/:id', async (req, resp) => {
+
+    try {
+
+        let id = req.params.id;
+
+        let registros = await consultarUsuarioPorIdPorIdService(id);
+
+        resp.send(registros)
+        
+    } 
+    catch (err) {
+
+        resp.status(400).send({
+
+            erro: err.message
+
+        })
+        
+    }
+
 })
 
 

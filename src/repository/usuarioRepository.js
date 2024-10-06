@@ -78,3 +78,25 @@ export async function deletarUsuario(id) {
     return linhasAfetadas;
 
 }
+
+
+//por Id
+export async function consultarUsuarioPorId(id) {
+
+    const comando = ` 
+    
+        select 
+        id_usuario  idUsuario,
+        nm_usuario  nome
+        from tb_usuario
+        where id_usuario = ?
+    
+    `;
+
+    let resposta = await con.query(comando, [id]);
+
+    let registros = resposta[0];
+
+    return registros;
+
+}

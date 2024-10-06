@@ -10,7 +10,7 @@ export async function inserirProgramaFavorito(programaFavorito) {
     `;
 
     let resposta = await con.query(comando, [programaFavorito.usuario,
-    programaFavorito.canalPrograma, programaFavorito.avaliacao]);
+    programaFavorito.programa, programaFavorito.avaliacao]);
 
     let info = resposta[0];
 
@@ -40,7 +40,7 @@ export async function consultarProgramaFavoritoId(id) {
 }
 
 
-export async function consultarProgramaFavorito() {
+export async function consultarProgramaFavorito(id) {
 
     const comando = `
     
@@ -50,11 +50,12 @@ export async function consultarProgramaFavorito() {
             id_canal_programa     canalPrograma,
             vl_avaliacao          avaliacao
 
-        from tb_programa_favorito;
+        from tb_programa_favorito
+        where id_programa_favorito = ?
 
     `;
 
-    let resposta = await con.query(comando);
+    let resposta = await con.query(comando, [id]);
 
     let registros = resposta[0];
 
