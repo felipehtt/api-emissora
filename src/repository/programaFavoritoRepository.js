@@ -105,3 +105,25 @@ export async function deletarProgramaFavorito(id) {
     return linhasAfetadas;
 
 }
+
+
+//Join
+export async function consultarProgramaFavoritoJoin(){
+
+    const comando = `
+        select tb_programa_favorito.id_programa_favorito         idProgramaFavorito,
+               tb_usuario.nm_usuario                             usuario,
+               tb_canal_programa.nm_programa                     programa,
+               tb_programa_favorito.vl_avaliacao                 avaliacao
+          from tb_programa_favorito
+          join tb_usuario on tb_programa_favorito.id_usuario = tb_usuario.id_usuario
+          join tb_canal_programa on tb_programa_favorito.id_canal_programa = tb_canal_programa.id_canal_programa;
+        `;
+
+    let resposta = await con.query(comando);
+
+    let info = resposta[0]
+
+    return info;
+
+}

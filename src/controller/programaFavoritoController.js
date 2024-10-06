@@ -7,7 +7,7 @@ const endpoints = Router();
 endpoints.post('/programaFavorito', async (req, resp) => {
 
     try {
-     
+
         let programaFavorito = req.body;
 
         let id = await db.inserirProgramaFavorito(programaFavorito);
@@ -17,8 +17,8 @@ endpoints.post('/programaFavorito', async (req, resp) => {
             idProgramaFavorito: id
 
         })
-        
-    } 
+
+    }
     catch (err) {
 
         resp.status(400).send({
@@ -26,37 +26,37 @@ endpoints.post('/programaFavorito', async (req, resp) => {
             erro: err.message
 
         })
-        
-    }
-    
-})
 
-endpoints.get('/programaFavorito', async (req, resp) => {
-
-    try {
-
-        let registros = await db.consultarProgramaFavorito();
-
-        resp.send(registros)
-        
-    } 
-    catch (err) {
-
-        resp.status(400).send({
-
-            erro: err.message
-
-        })
-        
     }
 
 })
+
+// endpoints.get('/programaFavorito', async (req, resp) => {
+
+//     try {
+
+//         let registros = await db.consultarProgramaFavorito();
+
+//         resp.send(registros)
+
+//     }
+//     catch (err) {
+
+//         resp.status(400).send({
+
+//             erro: err.message
+
+//         })
+
+//     }
+
+// })
 
 
 endpoints.put('/programaFavorito/:id', async (req, resp) => {
 
     try {
-     
+
         let programaFavorito = req.body;
 
         let id = req.params.id
@@ -70,8 +70,8 @@ endpoints.put('/programaFavorito/:id', async (req, resp) => {
         }
 
         resp.send();
-        
-    } 
+
+    }
     catch (err) {
 
         resp.status(400).send({
@@ -79,16 +79,16 @@ endpoints.put('/programaFavorito/:id', async (req, resp) => {
             erro: err.message
 
         })
-        
+
     }
-    
+
 })
 
 
 endpoints.delete('/programaFavorito/:id', async (req, resp) => {
 
     try {
-     
+
         let id = req.params.id;
 
         let linhasAfetadas = await db.deletarProgramaFavorito(id);
@@ -100,9 +100,45 @@ endpoints.delete('/programaFavorito/:id', async (req, resp) => {
         }
 
         resp.send();
-        
-    } 
+
+    }
     catch (err) {
+
+        resp.status(400).send({
+
+            erro: err.message
+
+        })
+
+    }
+
+})
+
+endpoints.get('/join/programaFavorito/:id', async (req, resp) => {
+    try {
+        let id = req.params.id
+        let registros = await consultarProgramaFavoritoIdService(id)
+
+        resp.send(registros);
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+//Join
+endpoints.get('/programaFavorito', async (req, resp) => {
+
+    try {
+    
+        let registros = await db.consultarProgramaFavoritoJoin();
+
+        resp.send(registros);
+
+    } 
+    catch(err){
 
         resp.status(400).send({
 
@@ -112,20 +148,6 @@ endpoints.delete('/programaFavorito/:id', async (req, resp) => {
         
     }
     
-})
-
-endpoints.get('/join/programaFavorito/:id', async (req, resp) => {
-    try {
-        let id = req.params.id
-        let registros = await consultarProgramaFavoritoIdService(id)
-
-        resp.send(registros)
-    } 
-    catch (err) {
-        resp.status(400).send({
-            erro: err.message
-        })
-    }
 })
 
 
