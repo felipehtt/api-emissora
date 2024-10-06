@@ -9,8 +9,8 @@ export async function inserirPrograma(programa) {
 
     `;
 
-    let resposta = await con.query(comando, [programa.idCanal, programa.nome,
-    programa.genero, programa.hora]);
+    let resposta = await con.query(comando, [programa.canal, programa.nome,
+    programa.genero, programa.horario]);
 
     let info = resposta[0];
 
@@ -25,14 +25,13 @@ export async function consultarPrograma() {
 
     const comando = ` 
     
-        select 
-        id_canal_programa  idCanalPrograma,
-        id_canal            idCanal,
-        nm_programa         nome,
-        ds_genero           genero,
-        hr_programa         hora
-
+        select tb_canal_programa.id_canal_programa     idCanalPrograma,
+                tb_canal.nm_canal   				   canal,
+                tb_canal_programa.nm_programa		   nomePrograma,
+                tb_canal_programa.ds_genero  		   genero,
+                tb_canal_programa.hr_programa		   horario
         from tb_canal_programa
+        join tb_canal on tb_canal_programa.id_canal = tb_canal.id_canal
     
     `;
 
@@ -59,8 +58,8 @@ export async function alterarPrograma(programa, id) {
     
     `;
 
-    let resposta = await con.query(comando, [programa.idCanal, programa.nome,
-    programa.genero, programa.hora, id]);
+    let resposta = await con.query(comando, [programa.canal, programa.nome,
+    programa.genero, programa.horario, id]);
 
     let info = resposta[0];
 
