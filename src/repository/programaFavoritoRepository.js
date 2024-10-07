@@ -47,7 +47,7 @@ export async function consultarProgramaFavorito(id) {
             select
             id_programa_favorito  idProgramaFavorito,
             id_usuario            usuario,
-            id_canal_programa     canalPrograma,
+            id_canal_programa     programa,
             vl_avaliacao          avaliacao
 
         from tb_programa_favorito
